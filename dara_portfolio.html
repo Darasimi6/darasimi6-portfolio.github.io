@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darasimi Ikuteyijo | Where Numbers Meet Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep-navy: #0a1929;
+            --warm-gold: #d4a574;
+            --soft-cream: #faf8f5;
+            --accent-rust: #c67b5c;
+            --sage-green: #6b8e7f;
+            --charcoal: #2c3e50;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--soft-cream);
+            color: var(--deep-navy);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #1a2942 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(107, 142, 127, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 3rem;
+            text-align: center;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            color: var(--warm-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            animation: fadeIn 1.5s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--soft-cream);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 1.2s ease-out 0.5s both;
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            color: rgba(250, 248, 245, 0.8);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            animation: fadeInUp 1.2s ease-out 0.7s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            animation: fadeInUp 1.2s ease-out 0.9s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--warm-gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(250, 248, 245, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 15px); }
+        }
+
+        .scroll-indicator span {
+            color: var(--warm-gold);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Section Styles */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 3rem;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 0.9rem;
+            color: var(--accent-rust);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+
+        /* Story Section */
+        .story-content {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .story-chapter {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(10, 25, 41, 0.08);
+            border-left: 4px solid var(--warm-gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .story-chapter:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 30px rgba(10, 25, 41, 0.12);
+        }
+
+        .chapter-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+        }
+
+        /* Journey Timeline */
+        .journey-timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--warm-gold), var(--sage-green));
+        }
+
+        .journey-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .journey-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--warm-gold);
+            border-radius: 50%;
+            border: 3px solid var(--soft-cream);
+            box-shadow: 0 0 0 3px var(--warm-gold);
+        }
+
+        .journey-date {
+            font-size: 0.85rem;
+            color: var(--accent-rust);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .journey-role {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--deep-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .journey-company {
+            font-size: 1.1rem;
+            color: var(--sage-green);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .journey-achievements {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .achievement {
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--charcoal);
+        }
+
+        .achievement::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--warm-gold);
+            font-weight: bold;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(10, 25, 41, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-8px);
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--warm-gold), var(--accent-rust));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--soft-cream);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            border: 1px solid rgba(212, 165, 116, 0.3);
+        }
+
+        /* Projects Showcase */
+        .projects-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(10, 25, 41, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(10, 25, 41, 0.15);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--deep-navy), var(--charcoal));
+            padding: 2rem;
+            color: white;
+        }
+
+        .project-type {
+            font-size: 0.85rem;
+            color: var(--warm-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-impact {
+            background: rgba(212, 165, 116, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--warm-gold);
+        }
+
+        .impact-label {
+            font-weight: 600;
+            color: var(--accent-rust);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .impact-text {
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        /* Leadership Section */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .leadership-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(10, 25, 41, 0.08);
+            border-top: 4px solid var(--sage-green);
+        }
+
+        .leadership-role {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--deep-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .leadership-org {
+            color: var(--sage-green);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .leadership-highlight {
+            padding: 1rem;
+            background: rgba(107, 142, 127, 0.1);
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-style: italic;
+            color: var(--charcoal);
+        }
+
+        /* Contact CTA */
+        .contact-section {
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #1a2942 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 3rem;
+            margin-top: 4rem;
+        }
+
+        .contact-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 1rem 2.5rem;
+            background: var(--warm-gold);
+            color: var(--deep-navy);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .contact-btn:hover {
+            background: var(--soft-cream);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 165, 116, 0.4);
+        }
+
+        .contact-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--warm-gold);
+            color: var(--warm-gold);
+        }
+
+        .contact-btn.secondary:hover {
+            background: var(--warm-gold);
+            color: var(--deep-navy);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .skills-grid,
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .journey-timeline {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">Mathematician • Strategist • Builder</div>
+            <h1>Darasimi Ikuteyijo</h1>
+            <p class="hero-tagline">Turning complex problems into elegant solutions, one equation at a time</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">3.9</span>
+                    <span class="stat-label">GPA</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">20%</span>
+                    <span class="stat-label">Efficiency Gains</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Leadership Roles</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore ↓</span>
+        </div>
+    </section>
+
+    <!-- My Story -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Chapter One</div>
+            <h2 class="section-title">The Story So Far</h2>
+            <p class="section-description">From violin strings to data strings, my journey has been about finding patterns, solving puzzles, and making impact.</p>
+        </div>
+
+        <div class="story-content">
+            <div class="story-chapter">
+                <h3 class="chapter-title">🎻 Where Numbers Meet Music</h3>
+                <p class="chapter-text">
+                    As Principal 2nd Violinist in the Grambling Symphony Orchestra, I learned that precision matters. Whether it's hitting the right note at exactly the right moment or optimizing a workflow by 20%, the discipline is the same. I bring this same attention to detail and harmony to everything I do—from coordinating web development teams to analyzing financial risk.
+                </p>
+            </div>
+
+            <div class="story-chapter">
+                <h3 class="chapter-title">🧮 The Mathematics of Impact</h3>
+                <p class="chapter-text">
+                    Mathematics isn't just about numbers—it's about finding elegant solutions to complex problems. With a 3.9 GPA and concentration in Actuarial Science, I've spent my time at Grambling State University not just learning formulas, but learning how to think. I co-founded the Mathematics Club to share this passion and help others see the beauty in problem-solving. Four members participated in the Putnam Exam in our first semester—that's the kind of impact I'm after.
+                </p>
+            </div>
+
+            <div class="story-chapter">
+                <h3 class="chapter-title">💼 From Theory to Practice</h3>
+                <p class="chapter-text">
+                    Theory is beautiful, but impact happens in the real world. That's why I've pursued experiences that let me apply my analytical thinking to real challenges—whether it's developing sustainable funding strategies for nonprofits, analyzing credit risk portfolios, or advising an 8-year photography business on premium positioning. I don't just want to understand the problem; I want to solve it.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Journey -->
+    <section style="background: white; padding-top: 6rem; padding-bottom: 6rem;">
+        <div class="section-header">
+            <div class="section-label">Chapter Two</div>
+            <h2 class="section-title">The Journey</h2>
+            <p class="section-description">Every experience has been a stepping stone, building toward something bigger.</p>
+        </div>
+
+        <div class="journey-timeline">
+            <div class="journey-item">
+                <div class="journey-date">May 2025 – August 2025</div>
+                <h3 class="journey-role">Project Management Intern</h3>
+                <div class="journey-company">Spark Mobility | Remote</div>
+                <div class="journey-achievements">
+                    <div class="achievement">Bridged the gap between client vision and technical execution, translating business requirements into specifications for a 5-person development team</div>
+                    <div class="achievement">Implemented Odoo for sprint planning and progress tracking, improving workflow efficiency by 20% and ensuring consistent on-time delivery</div>
+                    <div class="achievement">Learned that great project management isn't about micromanaging—it's about creating systems that empower teams to do their best work</div>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-date">January 2025 – March 2025</div>
+                <h3 class="journey-role">Consulting Extern</h3>
+                <div class="journey-company">PwC × Sunflower Bakery | Remote</div>
+                <div class="journey-achievements">
+                    <div class="achievement">Developed a sustainable funding strategy identifying 3 new revenue channels to enhance long-term financial stability for a nonprofit</div>
+                    <div class="achievement">Delivered data-driven presentation recommending operational improvements with projected 15% increase in program sustainability</div>
+                    <div class="achievement">Discovered my passion for strategy work that creates lasting impact, especially in mission-driven organizations</div>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-date">October 2025</div>
+                <h3 class="journey-role">Risk Analyst</h3>
+                <div class="journey-company">Goldman Sachs Job Simulation | Forage</div>
+                <div class="journey-achievements">
+                    <div class="achievement">Conducted credit risk analyses on individual and real estate portfolios, identifying potential financial exposures</div>
+                    <div class="achievement">Applied quantitative thinking to assess financial implications and recommend actionable risk mitigation strategies</div>
+                    <div class="achievement">Confirmed my interest in roles where analytical rigor meets strategic decision-making</div>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-date">December 2025</div>
+                <h3 class="journey-role">Independent Strategy Consultant</h3>
+                <div class="journey-company">Creative Services Client | Grambling, LA</div>
+                <div class="journey-achievements">
+                    <div class="achievement">Advised 8-year photography business on scaling revenue and brand positioning, including concept development for luxury photography experiences</div>
+                    <div class="achievement">Conducted comprehensive pricing and profitability analysis, evaluating multiple revenue models to improve margins and support premium market positioning</div>
+                    <div class="achievement">Proved that great consulting is about understanding the client's vision and finding the path to make it financially viable</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Arsenal -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Chapter Three</div>
+            <h2 class="section-title">The Toolkit</h2>
+            <p class="section-description">The skills and certifications that power my problem-solving.</p>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="skill-icon">📊</div>
+                <h3>Data & Analytics</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">PowerBI</span>
+                    <span class="skill-tag">Excel (VLOOKUP, XLOOKUP)</span>
+                    <span class="skill-tag">Statistical Analysis</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <div class="skill-icon">💼</div>
+                <h3>Business & Strategy</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Financial Analysis</span>
+                    <span class="skill-tag">Risk Assessment</span>
+                    <span class="skill-tag">Strategic Planning</span>
+                    <span class="skill-tag">Stakeholder Management</span>
+                    <span class="skill-tag">Project Management</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <div class="skill-icon">🎓</div>
+                <h3>Certifications</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">IBM Design Thinking</span>
+                    <span class="skill-tag">PwC Nonprofit Consulting</span>
+                    <span class="skill-tag">Goldman Sachs Risk</span>
+                    <span class="skill-tag">IBM Data Science</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <div class="skill-icon">🛠️</div>
+                <h3>Tools & Tech</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Odoo</span>
+                    <span class="skill-tag">MS Office Suite</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">Dashboard Development</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section style="background: white; padding-top: 6rem; padding-bottom: 6rem;">
+        <div class="section-header">
+            <div class="section-label">Chapter Four</div>
+            <h2 class="section-title">Projects That Matter</h2>
+            <p class="section-description">Where theory meets execution and ideas become impact.</p>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-type">Nonprofit Consulting</div>
+                    <h3 class="project-title">Sustainable Funding Strategy</h3>
+                    <p class="project-subtitle">PwC × Sunflower Bakery</p>
+                </div>
+                <div class="project-content">
+                    <div class="project-impact">
+                        <div class="impact-label">The Challenge</div>
+                        <p class="impact-text">A nonprofit bakery needed to secure long-term financial stability while maintaining their mission and impact.</p>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-label">My Approach</div>
+                        <p class="impact-text">Conducted stakeholder consultations, analyzed current revenue streams, and identified opportunities for diversification. Developed comprehensive recommendations backed by data.</p>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-label">The Impact</div>
+                        <p class="impact-text">Identified 3 new revenue channels and delivered presentation projecting 15% increase in program sustainability. Gave the organization a clear roadmap for the next year.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-type">Engineering Competition</div>
+                    <h3 class="project-title">Modern Bus Station</h3>
+                    <p class="project-subtitle">Autodesk × Grambling State University</p>
+                </div>
+                <div class="project-content">
+                    <div class="project-impact">
+                        <div class="impact-label">The Challenge</div>
+                        <p class="impact-text">72 hours to design and pitch a smart, sustainable infrastructure solution in the "Think Like a STEM Engineer" competition.</p>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-label">My Approach</div>
+                        <p class="impact-text">Led the team in researching solar panels, energy storage, and construction materials. Built data-backed presentation slides and delivered the final pitch.</p>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-label">The Impact</div>
+                        <p class="impact-text">Secured 2nd place by combining technical feasibility with sustainability analysis. Proved that great solutions balance innovation with implementability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-type">Business Strategy</div>
+                    <h3 class="project-title">Luxury Photography Positioning</h3>
+                    <p class="project-subtitle">Independent Consulting</p>
+                </div>
+                <div class="project-content">
+                    <div class="project-impact">
+                        <div class="impact-label">The Challenge</div>
+                        <p class="impact-text">An 8-year photography business wanted to scale revenue and differentiate in a crowded market.</p>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-label">My Approach</div>
+                        <p class="impact-text">Developed luxury brand positioning strategy centered on signature chandelier-based lighting. Conducted pricing analysis across multiple revenue models (per-guest, flat-fee, tiered packages).</p>
+                    </div>
+                    <div class="project-impact">
+                        <div class="impact-label">The Impact</div>
+                        <p class="impact-text">Created actionable roadmap for premium market positioning with improved margin potential. Client gained clarity on how to differentiate and command premium pricing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Chapter Five</div>
+            <h2 class="section-title">Leading With Purpose</h2>
+            <p class="section-description">Building communities, creating opportunities, and making campus life better.</p>
+        </div>
+
+        <div class="leadership-grid">
+            <div class="leadership-card">
+                <h3 class="leadership-role">Co-Founder & Leader</h3>
+                <div class="leadership-org">Mathematics Club, Grambling State University</div>
+                <p>Founded and formally registered the Mathematics Club to make mathematics accessible, practical, and engaging for students across all majors. Not just about equations—it's about building problem-solving confidence.</p>
+                <div class="leadership-highlight">
+                    🎯 4 members participated in Putnam Exam in our first active semester
+                </div>
+            </div>
+
+            <div class="leadership-card">
+                <h3 class="leadership-role">Resident Assistant</h3>
+                <div class="leadership-org">Grambling State University</div>
+                <p>More than just enforcing rules—it's about creating an environment where students can thrive. Supervise on-campus residents, resolve conflicts, and maintain a safe, inclusive community.</p>
+                <div class="leadership-highlight">
+                    📈 Enhanced housing operations by 10% through proactive issue resolution
+                </div>
+            </div>
+
+            <div class="leadership-card">
+                <h3 class="leadership-role">Principal 2nd Violinist & Librarian</h3>
+                <div class="leadership-org">Grambling Symphony Orchestra</div>
+                <p>Leading through music requires the same skills as leading in business: precision, collaboration, and understanding how individual parts create something greater than the sum.</p>
+                <div class="leadership-highlight">
+                    🎻 Managing musical scores while performing at the highest level
+                </div>
+            </div>
+
+            <div class="leadership-card">
+                <h3 class="leadership-role">Secretary</h3>
+                <div class="leadership-org">Grampreneurs</div>
+                <p>Supporting the entrepreneurial ecosystem on campus by keeping operations running smoothly and ensuring clear communication across the organization.</p>
+                <div class="leadership-highlight">
+                    📝 Organizational backbone for campus entrepreneurship
+                </div>
+            </div>
+
+            <div class="leadership-card">
+                <h3 class="leadership-role">Miss Chess</h3>
+                <div class="leadership-org">Chess Club</div>
+                <p>Strategic thinking on the chessboard translates directly to strategic thinking in business. Every move matters, and you always need to be thinking several steps ahead.</p>
+                <div class="leadership-highlight">
+                    ♟️ Where strategy meets style
+                </div>
+            </div>
+
+            <div class="leadership-card">
+                <h3 class="leadership-role">Active Member</h3>
+                <div class="leadership-org">Multiple Organizations</div>
+                <p>Rewriting the Code • African Student Association • ColorStack • National Society of Black Engineers • Honors College • Bain & Co 2026 SkillBridge</p>
+                <div class="leadership-highlight">
+                    🌍 Building networks, gaining perspectives, creating impact
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="contact-section">
+        <h2 class="contact-title">Let's Build Something Great</h2>
+        <p class="contact-text">
+            Whether it's analyzing risk, developing strategy, or solving complex problems—I'm ready to bring my analytical mindset and passion for impact to your team.
+        </p>
+        <div class="contact-links">
+            <a href="mailto:moiojyi@gmail.com" class="contact-btn">Email Me</a>
+            <a href="https://linkedin.com/in/ikuteyijo-darasimi" class="contact-btn secondary" target="_blank">Connect on LinkedIn</a>
+            <a href="tel:318-790-0698" class="contact-btn secondary">Call: (318) 790-0698</a>
+        </div>
+    </section>
+</body>
+</html>
